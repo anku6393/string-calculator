@@ -32,6 +32,14 @@ describe StringCalculator do
           expect(calculator.add("5,5,5,5,5")).to eq(25)
         end
       end
+
+      # when string contains numbers separated by the comma as well as "\n"
+      context "when the input contains number separated by line breaking operator" do
+        it "returns sum" do
+          expect(calculator.add("10\n12,3")).to eq(25)
+          expect(calculator.add("10\n20\n30,40")).to eq(100)
+        end
+      end
     end
   end
 end
