@@ -23,6 +23,15 @@ describe StringCalculator do
         expect(calculator.add("1,2")) .to eq(3)
         expect(calculator.add("10,20")) .to eq(30)
       end
+
+      # when string contains more than two, comma separated numbers
+      context "when the input contains an unknown amount of numbers" do
+        it "returns their sum" do
+          expect(calculator.add("1,2,3")).to eq(6)
+          expect(calculator.add("10,20,30,40")).to eq(100)
+          expect(calculator.add("5,5,5,5,5")).to eq(25)
+        end
+      end
     end
   end
 end
