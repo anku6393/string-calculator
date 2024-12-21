@@ -40,6 +40,41 @@ describe StringCalculator do
           expect(calculator.add("10\n20\n30,40")).to eq(100)
         end
       end
+
+      # when string contains multiple continuous newlines
+      it 'raises an error for multiple continuous newlines' do
+        expect { subject.add("1,\n\n2") }.to raise_error('continuous commas or newlines are not allowed')
+      end
+
+      # when string contains multiple continuous commas
+      it 'raises an error for multiple continuous commas' do
+        expect { subject.add("1,5,,2") }.to raise_error('continuous commas or newlines are not allowed')
+      end
+
+      # when string contains multiple continuous newlines and commas
+      it 'raises an error for multiple continuous newlines and commas' do
+        expect { subject.add("1,9\n,\n,2") }.to raise_error('continuous commas or newlines are not allowed')
+      end
+
+      # when string start with comma
+      it 'raises an error for input starting with a comma' do
+        expect { subject.add(',1,2') }.to raise_error('String cannot start or end with a comma or newline')
+      end
+
+       # when string ends with comma
+      it 'raises an error for input ending with a comma' do
+        expect { subject.add('1,2,') }.to raise_error('String cannot start or end with a comma or newline')
+      end
+
+      # when string start with \n
+      it 'raises an error for input starting with a newline' do
+        expect { subject.add("\n1,2") }.to raise_error('String cannot start or end with a comma or newline')
+      end
+
+      # when string end with \n
+      it 'raises an error for input ending with a newline' do
+        expect { subject.add("1,2\n") }.to raise_error('String cannot start or end with a comma or newline')
+      end
     end
   end
 end
